@@ -1,0 +1,61 @@
+[project]
+name = "omnixys-kafka"
+dynamic = ["version"]
+description = "Omnixys shared Kafka package (producer, consumer with retry/DLQ/idempotency/circuit-breaker)"
+license = { text = "GPL-3.0-or-later" }
+requires-python = ">=3.14"
+dependencies = [
+  "aiokafka>=0.14.0",
+  "opentelemetry-api>=1.42.1",
+  "opentelemetry-sdk>=1.42.1",
+  "opentelemetry-instrumentation-aiokafka>=0.63b1",
+]
+
+authors = [
+  {name = "Omnixys Team", email = "team@omnixys.com"},
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/omnixys_kafka/__init__.py"
+
+[tool.ruff]
+line-length = 120
+target-version = "py314"
+
+[tool.ruff.lint]
+select = ["ALL"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = [
+  "ANN101", "ANN401", "S101",
+  "T20", "FBT", "D", "INP001",
+]
+"src/**" = [
+  "D", "ANN401", "ARG002", "S104", "S105",
+]
+"src/omnixys_kafka/consumer.py" = [
+  "BLE001", "PLR0913",
+]
+"src/omnixys_kafka/producer.py" = [
+  "TC002", "PLR0913",
+]
+"src/omnixys_kafka/container.py" = [
+  "PLR0913",
+]
+
+[tool.mypy]
+strict = true
+ignore_missing_imports = true
+
+[dependency-groups]
+dev = [
+    "dishka>=1.10.1",
+    "mypy>=2.3.0",
+    "ruff>=0.15.21",
+    "pytest>=9.1.0",
+    "pytest-asyncio>=0.26.0",
+]
