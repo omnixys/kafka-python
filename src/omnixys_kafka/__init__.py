@@ -3,7 +3,7 @@ from omnixys_kafka.model import EventType, KafkaEnvelope
 from omnixys_kafka.producer import AIOKafkaEventProducer, KafkaProducer
 from omnixys_kafka.serializer import JsonEventSerializer
 
-__version__ = "1.1.0"
+__version__ = "2.0.2"
 
 __all__ = [
     "AIOKafkaEventProducer",

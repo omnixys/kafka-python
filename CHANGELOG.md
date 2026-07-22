@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/omnixys/kafka-python/compare/v2.0.1...v2.0.2) (2026-07-22)
+
+
+### Bug Fixes
+
+* **release:** add @semantic-release/exec to update __version__ in __init__.py ([9c5a19e](https://github.com/omnixys/kafka-python/commit/9c5a19e64443dfb5ed29b30da4d6034cc2d8055d))
+
 ## [2.0.1](https://github.com/omnixys/kafka-python/compare/v2.0.0...v2.0.1) (2026-07-22)
 
 
