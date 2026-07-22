@@ -16,8 +16,8 @@ from aiokafka import AIOKafkaProducer as _AIOKafkaProducer
 if TYPE_CHECKING:
     from aiokafka.structs import TopicPartition
 
-from omnixys_kafka.model import KafkaEnvelope
-from omnixys_kafka.serializer import JsonEventSerializer
+from kafka.model import KafkaEnvelope
+from kafka.serializer import JsonEventSerializer
 
 logger = logging.getLogger(__name__)
 

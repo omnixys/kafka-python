@@ -20,7 +20,7 @@ pip install omnixys-kafka
 ## Usage
 
 ```python
-from omnixys_kafka import AIOKafkaEventProducer, KafkaConsumer, JsonEventSerializer
+from kafka import AIOKafkaEventProducer, KafkaConsumer, JsonEventSerializer
 ```
 
 ## License

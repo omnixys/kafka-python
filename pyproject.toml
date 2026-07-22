@@ -30,10 +30,10 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.version]
-path = "src/omnixys_kafka/__init__.py"
+path = "src/kafka/__init__.py"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/omnixys_kafka"]
+packages = ["src/kafka"]
 
 [dependency-groups]
 dev = [
@@ -59,13 +59,13 @@ select = ["ALL"]
 "src/**" = [
     "D", "ANN401", "ARG002", "S104", "S105",
 ]
-"src/omnixys_kafka/consumer.py" = [
+"src/kafka/consumer.py" = [
     "BLE001", "PLR0913",
 ]
-"src/omnixys_kafka/producer.py" = [
+"src/kafka/producer.py" = [
     "TC002", "PLR0913",
 ]
-"src/omnixys_kafka/container.py" = [
+"src/kafka/container.py" = [
     "PLR0913",
 ]
 

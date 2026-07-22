@@ -6,8 +6,8 @@ from aiokafka import AIOKafkaProducer as _AIOKafkaProducer
 from opentelemetry import trace
 from opentelemetry.propagate import inject
 
-from omnixys_kafka.model import KafkaEnvelope
-from omnixys_kafka.serializer import JsonEventSerializer
+from kafka.model import KafkaEnvelope
+from kafka.serializer import JsonEventSerializer
 
 
 class KafkaProducer(Protocol):

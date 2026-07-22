@@ -4,9 +4,9 @@ from aiokafka import AIOKafkaConsumer as _AIOKafkaConsumer
 from aiokafka import AIOKafkaProducer as _AIOKafkaProducer
 from dishka import Provider, Scope, provide
 
-from omnixys_kafka.consumer import CircuitBreakerConfig, IdempotencyService, KafkaConsumer, RetryConfig
-from omnixys_kafka.producer import AIOKafkaEventProducer
-from omnixys_kafka.serializer import JsonEventSerializer
+from kafka.consumer import CircuitBreakerConfig, IdempotencyService, KafkaConsumer, RetryConfig
+from kafka.producer import AIOKafkaEventProducer
+from kafka.serializer import JsonEventSerializer
 
 
 class KafkaProvider(Provider):
