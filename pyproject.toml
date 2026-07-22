@@ -2,18 +2,28 @@
 name = "omnixys-kafka"
 dynamic = ["version"]
 description = "Omnixys shared Kafka package (producer, consumer with retry/DLQ/idempotency/circuit-breaker)"
+readme = "README.md"
 license = { text = "GPL-3.0-or-later" }
 requires-python = ">=3.14"
+authors = [{ name = "Omnixys Team", email = "team@omnixys.com" }]
+keywords = ["omnixys", "kafka", "async", "event-driven", "microservices"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Programming Language :: Python :: 3.14",
+    "Typing :: Typed",
+]
 dependencies = [
-  "aiokafka>=0.14.0",
-  "opentelemetry-api>=1.42.1",
-  "opentelemetry-sdk>=1.42.1",
-  "opentelemetry-instrumentation-aiokafka>=0.63b1",
+    "aiokafka>=0.14.0",
+    "opentelemetry-api>=1.42.1",
+    "opentelemetry-sdk>=1.42.1",
+    "opentelemetry-instrumentation-aiokafka>=0.63b1",
 ]
 
-authors = [
-  {name = "Omnixys Team", email = "team@omnixys.com"},
-]
+[project.urls]
+Homepage = "https://github.com/omnixys/omnixys"
+Repository = "https://github.com/omnixys/omnixys"
 
 [build-system]
 requires = ["hatchling"]
@@ -21,6 +31,18 @@ build-backend = "hatchling.build"
 
 [tool.hatch.version]
 path = "src/omnixys_kafka/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/omnixys_kafka"]
+
+[dependency-groups]
+dev = [
+    "dishka>=1.10.1",
+    "mypy>=2.3.0",
+    "ruff>=0.15.21",
+    "pytest>=9.1.0",
+    "pytest-asyncio>=0.26.0",
+]
 
 [tool.ruff]
 line-length = 120
@@ -31,20 +53,20 @@ select = ["ALL"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = [
-  "ANN101", "ANN401", "S101",
-  "T20", "FBT", "D", "INP001",
+    "ANN101", "ANN401", "S101",
+    "T20", "FBT", "D", "INP001",
 ]
 "src/**" = [
-  "D", "ANN401", "ARG002", "S104", "S105",
+    "D", "ANN401", "ARG002", "S104", "S105",
 ]
 "src/omnixys_kafka/consumer.py" = [
-  "BLE001", "PLR0913",
+    "BLE001", "PLR0913",
 ]
 "src/omnixys_kafka/producer.py" = [
-  "TC002", "PLR0913",
+    "TC002", "PLR0913",
 ]
 "src/omnixys_kafka/container.py" = [
-  "PLR0913",
+    "PLR0913",
 ]
 
 [tool.mypy]
@@ -55,12 +77,3 @@ ignore_missing_imports = true
 asyncio_mode = "auto"
 testpaths = ["tests"]
 pythonpath = ["src"]
-
-[dependency-groups]
-dev = [
-    "dishka>=1.10.1",
-    "mypy>=2.3.0",
-    "ruff>=0.15.21",
-    "pytest>=9.1.0",
-    "pytest-asyncio>=0.26.0",
-]
