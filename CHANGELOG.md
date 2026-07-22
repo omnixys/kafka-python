@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/omnixys/kafka-python/compare/v2.0.2...v2.0.3) (2026-07-22)
+
+
+### Bug Fixes
+
+* **publish:** replace gh release upload with uv publish to PyPI ([d82dc72](https://github.com/omnixys/kafka-python/commit/d82dc7213d30bf6bf05952a7655edf043b1640bc))
+
 ## [2.0.2](https://github.com/omnixys/kafka-python/compare/v2.0.1...v2.0.2) (2026-07-22)
 
 
