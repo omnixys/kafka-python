@@ -3,7 +3,7 @@ from kafka.model import EventType, KafkaEnvelope
 from kafka.producer import AIOKafkaEventProducer, KafkaProducer
 from kafka.serializer import JsonEventSerializer
 
-__version__ = "2.0.4"
+__version__ = "3.0.0"
 
 __all__ = [
     "AIOKafkaEventProducer",
