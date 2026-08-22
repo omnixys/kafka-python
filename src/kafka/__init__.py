@@ -28,7 +28,7 @@ from kafka.topics import (
     retry_topic_name,
 )
 
-__version__ = "3.0.0"
+__version__ = "3.0.1"
 
 __all__ = [
     "DEFAULT_DLQ_TOPIC_SUFFIX",

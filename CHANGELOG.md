@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/omnixys/kafka-python/compare/v3.0.0...v3.0.1) (2026-08-22)
+
+
+### Bug Fixes
+
+* **dir:** remove target dir ([4f95983](https://github.com/omnixys/kafka-python/commit/4f95983b0979ddf6e0ee212ff9344481fd443422))
+
 # [3.0.0](https://github.com/omnixys/kafka-python/compare/v2.0.4...v3.0.0) (2026-07-23)
 
 ## [2.0.4](https://github.com/omnixys/kafka-python/compare/v2.0.3...v2.0.4) (2026-07-22)
