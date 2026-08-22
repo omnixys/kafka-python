@@ -5,6 +5,7 @@ from aiokafka import AIOKafkaProducer as _AIOKafkaProducer
 from dishka import Provider, Scope, provide
 
 from kafka.consumer import CircuitBreakerConfig, IdempotencyService, KafkaConsumer, RetryConfig
+from kafka.handlers import KafkaEventDispatcher, KafkaHandlerRegistry
 from kafka.producer import AIOKafkaEventProducer
 from kafka.serializer import JsonEventSerializer
 
@@ -27,6 +28,18 @@ class KafkaProvider(Provider):
     @provide
     def idempotency_service(self) -> IdempotencyService:
         return IdempotencyService()
+
+    @provide
+    def handler_registry(self) -> KafkaHandlerRegistry:
+        return KafkaHandlerRegistry()
+
+    @provide
+    def dispatcher(
+        self,
+        registry: KafkaHandlerRegistry,
+        serializer: JsonEventSerializer,
+    ) -> KafkaEventDispatcher:
+        return KafkaEventDispatcher(registry=registry, serializer=serializer)
 
     @provide
     def producer(

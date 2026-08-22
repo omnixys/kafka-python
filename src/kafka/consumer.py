@@ -16,15 +16,14 @@ from aiokafka import AIOKafkaProducer as _AIOKafkaProducer
 if TYPE_CHECKING:
     from aiokafka.structs import TopicPartition
 
+from kafka.headers import DLQ_HEADERS, RETRY_HEADERS, parse_headers
 from kafka.model import KafkaEnvelope
 from kafka.serializer import JsonEventSerializer
+from kafka.topics import dlq_topic_name, original_topic_name, retry_topic_name
 
 logger = logging.getLogger(__name__)
 
 MessageHandler = Callable[[KafkaEnvelope[Any], dict[str, str]], Awaitable[None]]
-
-NO_RETRY_HEADERS = frozenset({"x-retry-count", "x-original-topic", "x-retry-at", "x-error"})
-NO_DLQ_HEADERS = frozenset({"x-original-topic", "x-error", "x-failed-at", "x-retry-count", "x-retry-at"})
 
 
 class CircuitBreakerState(StrEnum):
@@ -156,12 +155,12 @@ class KafkaConsumer:
                     await self._consumer.commit({tp: last_ok_offset + 1})
 
     async def _process_message(self, tp: TopicPartition, msg: Any) -> bool:
-        headers = self._parse_headers(msg.headers)
+        headers = parse_headers(msg.headers)
         raw_envelope = self._serializer.deserialize(msg.value)
         envelope = KafkaEnvelope.from_dict(raw_envelope)
 
         topic = msg.topic
-        original_topic = headers.get("x-original-topic", topic)
+        original_topic = headers.get("x-original-topic", original_topic_name(topic))
 
         retry_count = int(headers.get("x-retry-count", "0"))
         retry_at_str = headers.get("x-retry-at")
@@ -238,7 +237,7 @@ class KafkaConsumer:
         retry_count: int,
         error: str,
     ) -> None:
-        retry_topic = f"{original_topic}{self._retry_config.retry_topic_suffix}"
+        retry_topic = retry_topic_name(original_topic, self._retry_config.retry_topic_suffix)
         delay_ms = min(
             self._retry_config.initial_delay_ms * (self._retry_config.multiplier ** (retry_count - 1)),
             self._retry_config.max_delay_ms,
@@ -252,7 +251,7 @@ class KafkaConsumer:
             ("x-error", error.encode("utf-8")),
         ]
         for k, v in headers.items():
-            if k not in NO_RETRY_HEADERS:
+            if k not in RETRY_HEADERS:
                 retry_headers.append((k, v.encode("utf-8")))
 
         producer = _AIOKafkaProducer(bootstrap_servers=self._bootstrap_servers)
@@ -269,14 +268,18 @@ class KafkaConsumer:
         headers: dict[str, str],
         error: str,
     ) -> None:
-        dlq_topic = f"{original_topic}{self._retry_config.dlq_topic_suffix}"
+        dlq_topic = dlq_topic_name(
+            original_topic,
+            self._retry_config.retry_topic_suffix,
+            self._retry_config.dlq_topic_suffix,
+        )
         dlq_headers = [
             ("x-original-topic", original_topic.encode("utf-8")),
             ("x-error", error.encode("utf-8")),
             ("x-failed-at", datetime.now(UTC).isoformat().encode("utf-8")),
         ]
         for k, v in headers.items():
-            if k not in NO_DLQ_HEADERS:
+            if k not in DLQ_HEADERS:
                 dlq_headers.append((k, v.encode("utf-8")))
 
         producer = _AIOKafkaProducer(bootstrap_servers=self._bootstrap_servers)
@@ -294,13 +297,3 @@ class KafkaConsumer:
             pass
         finally:
             self._paused_partitions.pop(tp, None)
-
-    @staticmethod
-    def _parse_headers(raw: list[tuple[str, bytes]] | None) -> dict[str, str]:
-        if not raw:
-            return {}
-        result: dict[str, str] = {}
-        for k, v in raw:
-            if k not in result:
-                result[k] = v.decode("utf-8") if v else ""
-        return result
