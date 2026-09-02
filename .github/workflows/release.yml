@@ -1,9 +1,7 @@
-name: CI
+name: Release + Publishe python package
 
 on:
   push:
-    branches: [main]
-  pull_request:
     branches: [main]
 
 env:
