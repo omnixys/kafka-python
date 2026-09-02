@@ -179,7 +179,7 @@ wheels = [
 
 [[package]]
 name = "omnixys-kafka"
-version = "3.0.1"
+version = "3.0.2"
 source = { editable = "." }
 dependencies = [
     { name = "aiokafka" },
