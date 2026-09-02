@@ -28,7 +28,6 @@ from kafka.topics import (
     retry_topic_name,
 )
 
-
 __all__ = [
     "DEFAULT_DLQ_TOPIC_SUFFIX",
     "DEFAULT_RETRY_TOPIC_SUFFIX",
