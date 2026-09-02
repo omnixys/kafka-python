@@ -1,6 +1,6 @@
 [project]
 name = "omnixys-kafka"
-dynamic = ["version"]
+version = "3.0.1"
 description = "Omnixys shared Kafka package (producer, consumer with retry/DLQ/idempotency/circuit-breaker)"
 readme = "README.md"
 license = { text = "GPL-3.0-or-later" }
@@ -29,8 +29,6 @@ Repository = "https://github.com/omnixys/omnixys"
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[tool.hatch.version]
-path = "src/kafka/__init__.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/kafka"]
