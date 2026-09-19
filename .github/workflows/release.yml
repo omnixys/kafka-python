@@ -3,7 +3,7 @@ name: Release + Publishe python package
 on:
   push:
     branches: [main]
-
+    
 env:
   PYTHON_VERSION: "3.14"
   PACKAGE:  ${{ vars.PACKAGE }}
