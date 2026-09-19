@@ -3,6 +3,16 @@
 All notable changes in this project will be documented in this file.
 
 
+## [3.0.4](https://github.com/omnixys/kafka-python/compare/v3.0.3...v3.0.4) (2026-09-19)
+
+### Deps
+
+* **Deps:** update omnixys deps ([](https://github.com/omnixys/kafka-python/commit/a2d482fdac12f269c86eb2c33da491c8dc451eaa))
+
+### Other
+
+* **Other:** Merge pull request #3 from omnixys/migration/uuid-v7 ([](https://github.com/omnixys/kafka-python/commit/c0f062acc4d416485e8974a7c80ee030d193d957)), closes [#3](https://github.com/omnixys/kafka-python/issues/3)
+
 ## [3.0.3](https://github.com/omnixys/kafka-python/compare/v3.0.2...v3.0.3) (2026-09-04)
 
 ### Deps
