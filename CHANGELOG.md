@@ -3,6 +3,17 @@
 All notable changes in this project will be documented in this file.
 
 
+## [3.0.5](https://github.com/omnixys/kafka-python/compare/v3.0.4...v3.0.5) (2026-09-19)
+
+### Deps
+
+* **Deps:** update omnixys deps ([](https://github.com/omnixys/kafka-python/commit/877d86461af67a599af299ed870f328ef2fb7604))
+
+### Other
+
+* **Other:** Merge branch 'main' of https://github.com/omnixys/kafka-python ([](https://github.com/omnixys/kafka-python/commit/e624e517166ec6a5295ed7313be490627933d0a5))
+* **Other:** Merge branch 'main' of https://github.com/omnixys/kafka-python ([](https://github.com/omnixys/kafka-python/commit/b25a0ee2234269a57fc529fc1d170e18734b95b0))
+
 ## [3.0.4](https://github.com/omnixys/kafka-python/compare/v3.0.3...v3.0.4) (2026-09-19)
 
 ### Deps
